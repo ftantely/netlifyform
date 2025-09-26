@@ -3,214 +3,153 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Contact Form - Netlify</title>
+	<title>Netlify reCAPTCHA Form</title>
 	<style>
-		* {
-			margin: 0;
-			padding: 0;
-			box-sizing: border-box;
-		}
-		
 		body {
-			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+			max-width: 600px;
+			margin: 0 auto;
+			padding: 2rem;
 			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 			min-height: 100vh;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			padding: 20px;
 		}
 		
 		.form-container {
-			background: rgba(255, 255, 255, 0.95);
-			backdrop-filter: blur(10px);
-			border-radius: 20px;
-			padding: 40px;
-			box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-			width: 100%;
-			max-width: 500px;
+			background: white;
+			padding: 2rem;
+			border-radius: 12px;
+			box-shadow: 0 20px 40px rgba(0,0,0,0.1);
 		}
 		
-		.form-header {
-			text-align: center;
-			margin-bottom: 30px;
-		}
-		
-		.form-header h1 {
+		h1 {
 			color: #333;
-			font-size: 2.5rem;
-			margin-bottom: 10px;
-			background: linear-gradient(135deg, #667eea, #764ba2);
-			-webkit-background-clip: text;
-			-webkit-text-fill-color: transparent;
-			background-clip: text;
-		}
-		
-		.form-header p {
-			color: #666;
-			font-size: 1.1rem;
+			margin-bottom: 1.5rem;
+			text-align: center;
 		}
 		
 		.form-group {
-			margin-bottom: 25px;
+			margin-bottom: 1.5rem;
 		}
 		
-		.form-group label {
+		label {
 			display: block;
-			margin-bottom: 8px;
-			color: #333;
-			font-weight: 600;
-			font-size: 0.95rem;
+			margin-bottom: 0.5rem;
+			color: #555;
+			font-weight: 500;
 		}
 		
-		.form-group input,
-		.form-group textarea,
-		.form-group select {
+		input[type="text"],
+		input[type="email"],
+		textarea {
 			width: 100%;
-			padding: 15px 20px;
+			padding: 0.75rem;
 			border: 2px solid #e1e5e9;
-			border-radius: 12px;
+			border-radius: 6px;
 			font-size: 1rem;
-			background: #fff;
 			transition: border-color 0.3s ease;
-			font-family: inherit;
+			box-sizing: border-box;
 		}
 		
-		.form-group input:focus,
-		.form-group textarea:focus,
-		.form-group select:focus {
+		input[type="text"]:focus,
+		input[type="email"]:focus,
+		textarea:focus {
 			outline: none;
 			border-color: #667eea;
 		}
 		
-		.form-group textarea {
+		textarea {
 			resize: vertical;
-			min-height: 120px;
+			min-height: 100px;
 		}
 		
-		.checkbox-group {
-			display: flex;
-			align-items: center;
-			margin-bottom: 25px;
-		}
-		
-		.checkbox-group input[type="checkbox"] {
-			width: auto;
-			margin-right: 10px;
-			transform: scale(1.2);
-			accent-color: #667eea;
-		}
-		
-		.checkbox-group label {
-			margin-bottom: 0;
-			font-weight: normal;
-			cursor: pointer;
-		}
-		
-		.submit-btn {
-			width: 100%;
-			padding: 18px;
-			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-			color: white;
-			border: none;
-			border-radius: 12px;
-			font-size: 1.1rem;
-			font-weight: 600;
-			cursor: pointer;
-			transition: transform 0.2s ease;
-		}
-		
-		.submit-btn:hover {
-			transform: translateY(-2px);
-		}
-		
-		.required {
-			color: #e74c3c;
-		}
-		
-		.netlify-info {
-			background: rgba(102, 126, 234, 0.1);
-			border: 1px solid rgba(102, 126, 234, 0.2);
-			border-radius: 12px;
-			padding: 20px;
-			margin-bottom: 30px;
+		.recaptcha-container {
+			margin: 1.5rem 0;
 			text-align: center;
 		}
 		
-		.netlify-info h3 {
-			color: #667eea;
-			margin-bottom: 10px;
+		button {
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			color: white;
+			border: none;
+			padding: 1rem 2rem;
+			border-radius: 6px;
+			font-size: 1rem;
+			font-weight: 600;
+			cursor: pointer;
+			transition: transform 0.2s ease, box-shadow 0.2s ease;
+			width: 100%;
 		}
 		
-		.netlify-info p {
-			color: #555;
-			font-size: 0.95rem;
+		button:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 		}
 		
-		@media (max-width: 600px) {
-			.form-container {
-				padding: 30px 20px;
-			}
-			
-			.form-header h1 {
-				font-size: 2rem;
-			}
+		.info-box {
+			background: #f8f9fa;
+			border-left: 4px solid #667eea;
+			padding: 1rem;
+			margin: 2rem 0;
+			border-radius: 0 6px 6px 0;
+		}
+		
+		.info-box h3 {
+			margin: 0 0 0.5rem 0;
+			color: #333;
+		}
+		
+		.info-box p {
+			margin: 0;
+			color: #666;
+			line-height: 1.5;
 		}
 	</style>
 </head>
 <body>
 <div class="form-container">
-	<div class="form-header">
-		<h1>Let's see the change</h1>
-		<p>We'd love to hear from you!</p>
+	<h1>Contact Form with reCAPTCHA</h1>
+	
+	<div class="info-box">
+		<h3>Netlify-Provided reCAPTCHA</h3>
+		<p>This form uses Netlify's built-in reCAPTCHA v2 integration. The reCAPTCHA widget will automatically appear when the site is deployed to Netlify.</p>
 	</div>
 	
-	<div class="netlify-info">
-		<h3>🚀 Powered by Netlify Forms</h3>
-		<p>No JavaScript required - Netlify handles everything automatically!</p>
-	</div>
-	
-	<form name="contact" method="POST" data-netlify="true">
-		<input type="hidden" name="form-name" value="contact" />
-		
+	<!-- Netlify Form with reCAPTCHA -->
+	<form name="contact" method="POST" data-netlify-recaptcha="true" data-netlify="true">
 		<div class="form-group">
-			<label for="name">Full Name <span class="required">*</span></label>
+			<label for="name">Name:</label>
 			<input type="text" id="name" name="name" required>
 		</div>
 		
 		<div class="form-group">
-			<label for="email">Email Address <span class="required">*</span></label>
+			<label for="email">Email:</label>
 			<input type="email" id="email" name="email" required>
 		</div>
 		
 		<div class="form-group">
-			<label for="phone">Phone Number</label>
-			<input type="tel" id="phone" name="phone">
+			<label for="subject">Subject:</label>
+			<input type="text" id="subject" name="subject" required>
 		</div>
 		
 		<div class="form-group">
-			<label for="subject">Subject <span class="required">*</span></label>
-			<select id="subject" name="subject" required>
-				<option value="">Select a subject</option>
-				<option value="general">General Inquiry</option>
-				<option value="support">Technical Support</option>
-				<option value="business">Business Partnership</option>
-				<option value="feedback">Feedback</option>
-				<option value="other">Other</option>
-			</select>
-		</div>
-		
-		<div class="form-group">
-			<label for="message">Message <span class="required">*</span></label>
+			<label for="message">Message:</label>
 			<textarea id="message" name="message" required></textarea>
 		</div>
 		
-		<div class="checkbox-group">
-			<input type="checkbox" id="newsletter" name="newsletter" value="yes">
-			<label for="newsletter">Subscribe to newsletter</label>
+		<!-- reCAPTCHA will appear here when deployed to Netlify -->
+		<div class="recaptcha-container">
+			<div data-netlify-recaptcha="true"></div>
 		</div>
 		
-		<button type="submit" class="submit-btn">Send Message</button>
+		<button type="submit">Send Message</button>
+	</form>
+	
+	<!-- Hidden form for JavaScript frameworks (if needed) -->
+	<form name="contact" netlify netlify-honeypot="bot-field" hidden>
+		<input type="text" name="name" />
+		<input type="email" name="email" />
+		<input type="text" name="subject" />
+		<textarea name="message"></textarea>
 	</form>
 </div>
 </body>
